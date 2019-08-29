@@ -55,16 +55,11 @@ async function searchForListings() {
 
         //check if listing exists
         if (!(await doesListingExists(listingId))) {
-          console.log("Lisssss " + listingId);
           //save this listing
           await saveListing(listingId);
 
           //if its new listing, send email
-          await sendEmail(
-            "manan14patel@gmail.com",
-            listingId,
-            listingDetails.address
-          );
+          await sendEmail(email, listingId, listingDetails.address);
         }
       }
     });
@@ -90,11 +85,20 @@ function getListingDetails(listing) {
       .attr("href");
   console.log(listingUrl);
 
-  let address = $(listing)
+  let street = $(listing)
+    .first()
+    .find(baseSelector + " > div:nth-child(1) > div:nth-child(1) > h3")
+    .text()
+    .trim();
+  console.log(street);
+
+  let _address = $(listing)
     .first()
     .find(baseSelector + " > div:nth-child(1) > div:nth-child(2)")
     .text()
     .trim();
+
+  let address = `${street}, ${_address}`;
   console.log(address);
 
   let _rooms = $(listing)
