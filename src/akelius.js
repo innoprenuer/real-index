@@ -32,44 +32,46 @@ function getSearchUrl(baseUrl, criteria) {
 /**
  * returns listings that matches criteria
  */
-function searchForListings() {
-  rp({
-    url: getSearchUrl(baseUrl, searchCriteria),
-    method: "get",
-    timeout: 600000
-  })
-    .then(function(html) {
-      //load html contents in jquery selector via cheerio;
-      var $ = cheerio.load(html);
-
-      $("app-unit-item").each(async function(i, elem) {
-        //get listing details
-        let listingDetails = getListingDetails(elem);
-
-        //check if criteria is satisfied
-        if (isCriteriaSatisfied(listingDetails)) {
-          let { email, listingId } = await getContactDetails(
-            listingDetails.listingUrl
-          );
-
-          //check if listing exists
-          if (!(await doesListingExists(listingId))) {
-            //if its new listing, send email
-            await sendEmail(
-              "manan14patel@gmail.com",
-              listingId,
-              listingDetails.address
-            );
-            //save this listing
-            await saveListing(listingId);
-          }
-        }
-      });
-    })
-    .catch(function(err) {
-      console.error(err);
-      return;
+async function searchForListings() {
+  try {
+    let html = await rp({
+      url: getSearchUrl(baseUrl, searchCriteria),
+      method: "get",
+      timeout: 600000
     });
+
+    //load html contents in jquery selector via cheerio;
+    var $ = cheerio.load(html);
+
+    $("app-unit-item").each(async function(i, elem) {
+      //get listing details
+      let listingDetails = getListingDetails(elem);
+
+      //check if criteria is satisfied
+      if (isCriteriaSatisfied(listingDetails)) {
+        let { email, listingId } = await getContactDetails(
+          listingDetails.listingUrl
+        );
+
+        //check if listing exists
+        if (!(await doesListingExists(listingId))) {
+          console.log("Lisssss " + listingId);
+          //save this listing
+          await saveListing(listingId);
+
+          //if its new listing, send email
+          await sendEmail(
+            "manan14patel@gmail.com",
+            listingId,
+            listingDetails.address
+          );
+        }
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    return;
+  }
 }
 
 /**

@@ -18,10 +18,13 @@ function initializeFirebase() {
 
 async function saveListing(listingId) {
   console.log(`ListingId to be saved - ${listingId}`);
+  let obj = {};
+  obj.id = listingId;
+  obj.id.groups = 0;
   await firebaseInstance
     .database()
-    .ref("listings/1234")
-    .set({ listingId: listingId });
+    .ref("listings/" + listingId)
+    .set(obj);
 }
 
 async function doesListingExists(listingId) {

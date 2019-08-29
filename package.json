@@ -1,18 +1,22 @@
 {
-  "name": "stockscraper",
-  "version": "1.0.0",
-  "description": "scraper to scrape stocks data",
+  "name": "real-index",
+  "version": "0.0.1",
+  "description": "Real Estate listing discovery and application",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://manan77p@bitbucket.org/gamilio/stockscraper.git"
+    "url": "git+https://github.com/innoprenuer/real-index.git"
   },
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/gamilio/stockscraper#readme",
+  "engines": {
+    "node": "10.5.x",
+    "npm": "6.1.x"
+  },
+  "author": "Innoprenuer(manan77patel@gmail.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/innoprenuer/real-index#readme",
   "dependencies": {
     "cheerio": "latest",
     "dotenv": "^8.1.0",

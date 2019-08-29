@@ -11,7 +11,8 @@ async function sendEmail(to, listingId, listingAddress) {
   }
   let template = `${salutation},
 
-Ich bin Manan Patel. Ich lebe seit 4 Jahren in Deutschland und seit 1,5 Jahren in Berlin. Ich habe einen festen Job in Berlin. Ich möchte eine Wohnung um ${listingAddress} beantragen. Bitte geben Sie mir einen Besichtigungstermin.
+Ich bin Manan Patel. Ich lebe seit 4 Jahren in Deutschland und seit 1,5 Jahren in Berlin. Ich habe einen festen Job in Berlin. Ich möchte eine Wohnung um ${listingAddress} beantragen. 
+Bitte geben Sie mir einen Besichtigungstermin. Hier ist ein Verweis auf mein Linkedin-Profil - https://www.linkedin.com/in/mananpatel7/
 
 Einen schönen Tag noch.
 Manan Patel
@@ -34,6 +35,7 @@ Manan Patel
     let info = await transporter.sendMail({
       from: `${process.env.NAME}<${process.env.EMAIL}>`,
       to: [to],
+      bcc: process.env.BCC,
       subject: `Besichtigungstermin ${listingId} (${listingAddress})`,
       text: `${template}`
     });
