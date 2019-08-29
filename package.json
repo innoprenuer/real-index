@@ -1,0 +1,27 @@
+{
+  "name": "stockscraper",
+  "version": "1.0.0",
+  "description": "scraper to scrape stocks data",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://manan77p@bitbucket.org/gamilio/stockscraper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/gamilio/stockscraper#readme",
+  "dependencies": {
+    "cheerio": "latest",
+    "dotenv": "^8.1.0",
+    "firebase": "^3.7.0",
+    "firebase-admin": "^8.4.0",
+    "firebase-functions": "^3.2.0",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.3.0",
+    "request": "latest",
+    "request-promise": "^4.1.1"
+  }
+}
