@@ -56,9 +56,10 @@ async function searchForListings() {
         //check if listing exists
         if (!(await doesListingExists(listingId))) {
           //if its new listing, send email
-          await sendEmail(email, listingId, listingDetails.address);
-          //save this listing
-          await saveListing(listingId);
+          if (await sendEmail(email, listingId, listingDetails.address)) {
+            //save this listing
+            await saveListing(listingId);
+          }
         }
       }
     });

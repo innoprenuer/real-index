@@ -42,8 +42,10 @@ Manan Patel
     });
 
     console.log("Message sent to : %s", to);
+    return true;
   } catch (error) {
     console.error(error.message);
+    return false;
   }
 }
 
